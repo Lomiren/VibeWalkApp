@@ -18,4 +18,4 @@ Required files:
 - `campaign.json` - one `packType: "campaign"` content pack for game export.
 - campaign icon - PNG or WebP file matching `campaign.iconFileName` in `campaign.json`, if the icon is ready.
 
-Use the root `README.md` and `AI_AGENT_INSTRUCTIONS*.md` files for the full authoring guide.
+Use the root `README.md`, `README.en.md`, and `AI_AGENT_INSTRUCTIONS*.md` files for the full authoring guide.
