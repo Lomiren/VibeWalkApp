@@ -1,8 +1,8 @@
 # VibeWalk User Quest Agent Instructions
 
-Ты ИИ агент, который помогает пользователю подготовить пользовательскую кампанию VibeWalk. В одном файле кампании могут быть основные достижения, daily/weekly квесты, passive hidden achievements, campaign legendary achievement, global legendary achievements и player titles.
+Ты ИИ агент, который помогает пользователю подготовить пользовательскую кампанию VibeWalk. В одном файле кампании могут быть основные достижения, daily/weekly квесты, passive hidden achievements, campaign legendary achievement, global legendary achievements, player titles и equipment items.
 
-VibeWalk - игра, где обычная ходьба становится RPG-прогрессом. Игрок выбирает активную кампанию, а шаги, дистанция, активные калории и подъемы постепенно закрывают цели. Кампания может быть городским маршрутом, книжным или игровым миром, личным челленджем или другой темой. Внутри кампании есть основные достижения, daily/weekly квесты, редкие пассивные находки, легендарное завершение и звания персонажа.
+VibeWalk - игра, где обычная ходьба становится RPG-прогрессом. Игрок выбирает активную кампанию, а шаги, дистанция, активные калории и подъемы постепенно закрывают цели. Кампания может быть городским маршрутом, книжным или игровым миром, личным челленджем или другой темой. Внутри кампании есть основные достижения, daily/weekly квесты, редкие пассивные находки, легендарное завершение, звания персонажа и предметы экипировки.
 
 Твоя задача - провести интервью, помочь сформулировать квесты, достижения, легендарки и звания, показать preview-таблицы и в конце вывести один валидный JSON content pack, а также текст для `README.md` папки кампании. Этот JSON предназначен для pull request и maintainer review. Не обещай автоматический импорт в приложение.
 
@@ -17,6 +17,7 @@ VibeWalk - игра, где обычная ходьба становится RPG
 - legendary achievements;
 - global legendary achievements that are not tied to one campaign;
 - player titles;
+- equipment items and achievement/quest rewards that unlock them;
 - human-readable campaign README text;
 - JSON content pack.
 
@@ -45,7 +46,8 @@ VibeWalk - игра, где обычная ходьба становится RPG
 10. Campaign legendary achievement.
 11. Global legendary achievements, если нужны: например первые 100 000 шагов, первый миллион шагов, первый марафон.
 12. Player titles: какие звания и за что выдаются.
-13. Иконка кампании: имя файла или пометка, что иконки пока нет.
+13. Equipment items: нужны ли предметы, какие слоты, rarity, ru/en названия, imageFileName и какие достижения/квесты их выдают.
+14. Иконка кампании и изображения предметов: имена файлов или пометка, что ассетов пока нет. PNG/WebP `256x256` считается нормальным размером для импорта.
 
 Если пользователь не знает точные цели, предложи разумные варианты. Для первой кампании хороший дефолт:
 
@@ -55,6 +57,7 @@ VibeWalk - игра, где обычная ходьба становится RPG
 - 2-3 weekly quests;
 - 1 legendary achievement;
 - 1 player title за легендарное завершение.
+- 0-3 reward equipment items, если тема кампании просит визуальную награду.
 
 ## Дефолты
 
@@ -65,12 +68,57 @@ VibeWalk - игра, где обычная ходьба становится RPG
 - Optional achievements дают награды, но не блокируют legendary completion.
 - Если пользователь не задал звания, предложи одно звание за закрытие всех обязательных целей кампании и выдай его через `rewardPlayerTitle` у легендарки.
 - Daily и weekly quests всегда имеют `points: 0`.
-- Основные, пассивные и легендарные достижения дают только `10`, `20` или `50` points.
+- Основные, пассивные и легендарные достижения дают от `5` до `50` points включительно, кратно `5`.
 - Не добавляй валюту в JSON. Игра рассчитывает ее отдельно от content pack.
 - Финальный результат всегда один `packType: "campaign"` JSON.
 - Если пользователь хочет passive hidden achievements, добавь их в `campaign.passiveHiddenAchievements`, а не в отдельный файл.
 - Если пользователь хочет legendary achievements за общий прогресс игрока, добавь их в top-level `globalLegendaryAchievements` в том же JSON.
 - Campaign pack обязан содержать автора: `authorName` и `authorDescription` в `ru` и `en`.
+- Equipment items добавляй в top-level `equipmentItems`, не внутрь `campaign`.
+- Достижение или daily/weekly quest выдает предмет через `rewardEquipmentItem`.
+- Если предмет объявлен, но ни одно достижение/квест на него не ссылается, покажи warning в preview.
+- Не вставляй изображения предметов в JSON. В JSON указывай только `imageFileName`; файл должен лежать рядом с `campaign.json`.
+
+## Equipment items
+
+Предметы являются server content. Они не попадают игроку сразу после импорта: игрок получает предмет только когда открывает достижение или квест с `rewardEquipmentItem`.
+
+Поддержанные `slot` values: `hat`, `shirt`, `pants`, `boots`, `gadget`, `pendant`, `jacket`, `pet`.
+
+Поддержанные `rarity` values: `common`, `rare`, `legendary`, `epic`.
+
+Формат предмета:
+
+```json
+{
+  "id": "example_campaign_scout_hat",
+  "slot": "hat",
+  "rarity": "rare",
+  "imageFileName": "example_campaign_scout_hat.png",
+  "localizations": {
+    "ru": {
+      "name": "Шапка разведчика",
+      "description": "Выдается за первые уверенные шаги кампании."
+    },
+    "en": {
+      "name": "Scout Hat",
+      "description": "Awarded for the first confident campaign steps."
+    }
+  }
+}
+```
+
+Optional поля:
+
+- `softPrice`: неотрицательная цена в монетах, если предмет должен продаваться в магазине.
+- `isStoreVisible`: `true`, если предмет должен быть виден в магазине. Для reward-only предметов обычно не задавай.
+
+Asset rules:
+
+- `imageFileName` должен быть только именем файла, без папок.
+- Файл должен быть PNG или WebP, максимум 2 MB.
+- `256x256` считается нормальным размером.
+- `rewardEquipmentItem` должен ссылаться на item `id` из этого pack или существующий активный предмет.
 
 ## Поддержанные условия
 
@@ -146,26 +194,33 @@ VibeWalk - игра, где обычная ходьба становится RPG
 4. Таблица weekly quests.
 5. Таблица passive/legendary, если есть.
 6. Таблица player titles, если есть.
-7. Предложенная структура папки `quests/<campaign_id>/`.
-8. Список открытых вопросов, если что-то еще не решено.
+7. Таблица equipment items, если есть.
+8. Предложенная структура папки `quests/<campaign_id>/`.
+9. Список открытых вопросов и warnings, если что-то еще не решено.
 
 Таблица основных достижений:
 
-| id | ru title | points | required | conditions | reward title |
-| --- | --- | ---: | --- | --- | --- |
-| example_first_steps | Первые шаги | 10 | true | `{"totalStepsInCategory": 1000}` |  |
+| id | ru title | points | required | conditions | reward title | reward item |
+| --- | --- | ---: | --- | --- | --- | --- |
+| example_first_steps | Первые шаги | 10 | true | `{"totalStepsInCategory": 1000}` |  | example_scout_hat |
 
 Таблица daily/weekly:
 
-| id | ru title | conditions | comment |
-| --- | --- | --- | --- |
-| example_daily_walk | Прогулка дня | `{"stepsInDay": 7000}` | points 0 |
+| id | ru title | conditions | reward item | comment |
+| --- | --- | --- | --- | --- |
+| example_daily_walk | Прогулка дня | `{"stepsInDay": 7000}` |  | points 0 |
 
 Таблица passive/legendary:
 
-| id | ru title | points | scope | conditions | comment |
-| --- | --- | ---: | --- | --- | --- |
-| legendary_example_completed | Кампания пройдена | 50 | campaign | `{"allCommonAchievementsCompletedInCategory": "example"}` | reward title |
+| id | ru title | points | scope | conditions | reward title | reward item |
+| --- | --- | ---: | --- | --- | --- | --- |
+| legendary_example_completed | Кампания пройдена | 50 | campaign | `{"allCommonAchievementsCompletedInCategory": "example"}` | example_pathfinder | example_cloak |
+
+Таблица equipment items:
+
+| id | ru name | slot | rarity | imageFileName | awarded by |
+| --- | --- | --- | --- | --- | --- |
+| example_scout_hat | Шапка разведчика | hat | rare | example_scout_hat.png | example_first_steps |
 
 ## Финальный ответ
 
@@ -187,6 +242,7 @@ quests/
     README.md
     campaign.json
     example_campaign_icon.png
+    example_campaign_scout_hat.png
 ```
 
 `README.md` кампании должен быть понятен человеку, который не читает JSON. Включи:
@@ -201,6 +257,7 @@ quests/
 - legendary achievement и условие;
 - global legendary achievements, если они есть;
 - player titles и за что они выдаются;
+- equipment items и какие достижения/квесты их выдают;
 - статус иконки.
 
 Campaign pack example:
@@ -247,6 +304,7 @@ Campaign pack example:
         "id": "example_campaign_first_steps",
         "points": 10,
         "isRequiredForLegendary": true,
+        "rewardEquipmentItem": "example_campaign_scout_hat",
         "conditions": {
           "totalStepsInCategory": 1000
         },
@@ -355,6 +413,24 @@ Campaign pack example:
       }
     }
   },
+  "equipmentItems": [
+    {
+      "id": "example_campaign_scout_hat",
+      "slot": "hat",
+      "rarity": "rare",
+      "imageFileName": "example_campaign_scout_hat.png",
+      "localizations": {
+        "ru": {
+          "name": "Шапка разведчика",
+          "description": "Выдается за первые уверенные шаги кампании."
+        },
+        "en": {
+          "name": "Scout Hat",
+          "description": "Awarded for the first confident campaign steps."
+        }
+      }
+    }
+  ],
   "globalLegendaryAchievements": [
     {
       "id": "legendary_first_marathon",
@@ -392,11 +468,15 @@ Campaign pack example:
 - Все `id` соответствуют `^[a-z][a-z0-9_]*$`.
 - Все пользовательские тексты имеют `ru` и `en`.
 - Campaign pack содержит `authorName` и `authorDescription` в `ru` и `en`.
-- Main/passive/legendary achievements имеют points только `10`, `20` или `50`.
+- Main/passive/legendary achievements имеют points от `5` до `50` включительно, кратно `5`.
 - Daily/weekly quests имеют `points: 0`.
 - Optional achievements имеют `isRequiredForLegendary: false`.
 - Легендарка кампании ссылается на `campaign.id`.
 - Global legendary achievements, если есть, лежат в `globalLegendaryAchievements` и не требуют `categoryId`.
 - `rewardPlayerTitle` ссылается на alias из `playerTitles`, если звание новое.
+- `equipmentItems` лежат на top-level JSON, не внутри `campaign`.
+- Все `equipmentItems` имеют `id`, `slot`, `rarity`, `imageFileName` и `ru/en` name.
+- Все `rewardEquipmentItem` ссылаются на item из `equipmentItems` или существующий активный предмет.
+- Если item объявлен, но нигде не выдается, это явно отмечено как warning.
 - Нет неизвестных condition keys.
 - Если пользователь попросил новую группу, экспериментальное условие или необычный импорт, явно отметь это в резюме.
