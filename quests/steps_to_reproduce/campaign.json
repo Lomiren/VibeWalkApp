@@ -1,0 +1,147 @@
+{
+  "contentPackVersion": "1.0",
+  "packType": "campaign",
+  "campaign": {
+    "id": "steps_to_reproduce",
+    "group": "global_games",
+    "iconFileName": "steps_to_reproduce_icon.png",
+    "localizations": {
+      "ru": {
+        "title": "Шаги воспроизведения",
+        "description": "Бета-тест на ногах: ищем баги, считаем шаги и делаем вид, что так и задумано.",
+        "authorName": "VibeWalk",
+        "authorDescription": "Официальная кампания VibeWalk"
+      },
+      "en": {
+        "title": "Steps to Reproduce",
+        "description": "A beta test on foot: find bugs, count steps, and pretend it was intended.",
+        "authorName": "VibeWalk",
+        "authorDescription": "Official VibeWalk campaign"
+      }
+    },
+    "playerTitles": [
+      {
+        "id": "beta_hero",
+        "localizations": {
+          "ru": {
+            "name": "Бета-герой",
+            "description": "Прошел первый бета-маршрут и сделал вид, что так и задумано."
+          },
+          "en": {
+            "name": "Beta Hero",
+            "description": "Completed the first beta route and pretended it was intended."
+          }
+        }
+      }
+    ],
+    "commonAchievements": [
+      {
+        "id": "steps_to_reproduce_first_log",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 1000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Первый лог пошел",
+            "short_description": "1000 шагов. Уже что-то.",
+            "description": "1000 шагов. Уже что-то."
+          },
+          "en": {
+            "title": "First Log Captured",
+            "short_description": "1,000 steps. That is something.",
+            "description": "1,000 steps. That is something."
+          }
+        }
+      },
+      {
+        "id": "steps_to_reproduce_stable_repro",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 5000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Стабильно воспроизводится",
+            "short_description": "5000 шагов. Не случайность.",
+            "description": "5000 шагов. Не случайность."
+          },
+          "en": {
+            "title": "Stable Reproduction",
+            "short_description": "5,000 steps. Not random.",
+            "description": "5,000 steps. Not random."
+          }
+        }
+      },
+      {
+        "id": "steps_to_reproduce_ship_it",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 10000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Можно выкатывать, наверное",
+            "short_description": "10 000 шагов. Рискнем.",
+            "description": "10 000 шагов. Рискнем."
+          },
+          "en": {
+            "title": "Ship It, Probably",
+            "short_description": "10,000 steps. Worth the risk.",
+            "description": "10,000 steps. Worth the risk."
+          }
+        }
+      }
+    ],
+    "dailyQuests": [],
+    "weeklyQuests": [],
+    "passiveHiddenAchievements": []
+  },
+  "equipmentItems": [
+    {
+      "id": "steps_to_reproduce_bugsy",
+      "slot": "pet",
+      "rarity": "legendary",
+      "imageFileName": "steps_to_reproduce_bugsy.png",
+      "localizations": {
+        "ru": {
+          "name": "Багсик",
+          "description": "Питомец первого бета-теста. Молчит, но в логах все видел."
+        },
+        "en": {
+          "name": "Bugsy",
+          "description": "The first beta test pet. Silent, but saw everything in the logs."
+        }
+      }
+    }
+  ],
+  "globalLegendaryAchievements": [
+    {
+      "id": "legendary_steps_to_reproduce_completed",
+      "points": 10,
+      "rewardPlayerTitle": "beta_hero",
+      "rewardEquipmentItem": "steps_to_reproduce_bugsy",
+      "conditions": {
+        "allCommonAchievementsCompletedInCategory": "steps_to_reproduce"
+      },
+      "localizations": {
+        "ru": {
+          "title": "Не баг, а фича",
+          "short_description": "Первый бета-тест закрыт. Наверное.",
+          "description": "Первый бета-тест закрыт. Наверное."
+        },
+        "en": {
+          "title": "Not a Bug, a Feature",
+          "short_description": "First beta test complete. Probably.",
+          "description": "First beta test complete. Probably."
+        }
+      }
+    }
+  ]
+}
