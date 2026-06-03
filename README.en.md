@@ -1,8 +1,6 @@
 # User Quests for VibeWalk
 
-[Русская версия](README.md)
-
-VibeWalk turns ordinary walking into RPG progress. A player chooses an active campaign, and walking data such as steps, distance, active calories, and climbs gradually completes campaign goals. A campaign can be a city route, a book or game world, a personal challenge, or another theme. It can include main achievements, daily/weekly quests, passive hidden discoveries, a legendary completion, player titles, and equipment items.
+VibeWalk turns ordinary walking into RPG progress. A player chooses an active campaign, and walking data such as steps, distance, active calories, and climbs gradually completes campaign goals. A campaign can be a city route, a book or game world, a personal challenge, or another theme. It can include main achievements, daily/weekly quests, passive hidden discoveries, a legendary completion, player titles, equipment items, and equipment sets.
 
 This folder is for authors of user-submitted campaigns. It describes the public content pack format for review and pull requests. After a PR, a maintainer reviews the content and imports it into the app.
 
@@ -18,16 +16,17 @@ This folder is for authors of user-submitted campaigns. It describes the public 
 - `legendaryAchievement` - a rare achievement for major campaign completion.
 - `globalLegendaryAchievements` - legendary achievements for overall player progress, not tied to one campaign.
 - `playerTitles` - proposed character titles. An achievement can reference a title through `rewardPlayerTitle`.
+- `equipmentCollections` - equipment sets, for example “Witcher Set”. This groups items in the store and hero chest.
 - `equipmentItems` - equipment items awarded by achievements or quests through `rewardEquipmentItem`.
 
 ## Using the AI Agent
 
 1. Open a new chat with an AI agent.
-2. Attach or paste `AI_AGENT_INSTRUCTIONS.en.md` as the persistent instruction.
+2. Attach or paste `UserQuests/AI_AGENT_INSTRUCTIONS.en.md` as the persistent instruction.
 3. In the first message, give the campaign theme and ask the agent to interview you.
-4. Answer the questions: title, author, group, writing style, required and optional goals, daily/weekly quests, passive/legendary ideas, player titles, and equipment items.
-5. Review the preview tables: titles, conditions, points, required flags, reward titles, and reward items.
-6. Ask the agent for the final JSON content pack and campaign `README.md` text. A campaign is always one JSON file: main achievements, daily/weekly quests, passive hidden achievements, legendary achievements, player titles, and equipment items are kept together.
+4. Answer the questions: title, author, group, writing style, required and optional goals, daily/weekly quests, passive/legendary ideas, player titles, equipment items, and equipment sets.
+5. Review the preview tables: titles, conditions, points, required flags, reward titles, reward items, and equipment sets.
+6. Ask the agent for the final JSON content pack and campaign `README.md` text. A campaign is always one JSON file: main achievements, daily/weekly quests, passive hidden achievements, legendary achievements, player titles, equipment sets, and equipment items are kept together.
 7. Create a pull request with your campaign folder inside `quests/`.
 
 Example first prompt:
@@ -51,8 +50,8 @@ quests/
 
 Campaign folder contents:
 
-- `campaign.json` - one `packType: "campaign"` JSON file. It contains main achievements, daily/weekly quests, passive hidden achievements, campaign legendary achievement, optional global legendary achievements, player titles, equipment items, and campaign author metadata.
-- `README.md` - human-readable campaign description: what the campaign is, who wrote it, what quests and achievements exist, what each condition means, how many points are awarded, which titles and items are unlocked.
+- `campaign.json` - one `packType: "campaign"` JSON file. It contains main achievements, daily/weekly quests, passive hidden achievements, campaign legendary achievement, optional global legendary achievements, player titles, equipment sets, equipment items, and campaign author metadata.
+- `README.md` - human-readable campaign description: what the campaign is, who wrote it, what quests and achievements exist, what each condition means, how many points are awarded, which titles, sets, and items are unlocked.
 - Campaign icon - PNG or WebP file whose name matches `campaign.iconFileName`. `256x256` or larger is normal for import; `512x512` is not required.
 - Equipment images - PNG or WebP files next to `campaign.json`. Each file name must match `equipmentItems[].imageFileName`.
 
@@ -68,6 +67,7 @@ The campaign `README.md` should include:
 - legendary achievement and its condition;
 - global legendary achievements, if present;
 - player titles and what unlocks them;
+- equipment sets, if present;
 - equipment items, their slots, rarity, and which achievement/quest awards them;
 - campaign icon and item image status.
 
@@ -82,7 +82,9 @@ The campaign `README.md` should include:
 - A user campaign is one `packType: "campaign"` JSON file. If the campaign has passive achievements, put them in `campaign.passiveHiddenAchievements`.
 - Global legendary achievements go in top-level `globalLegendaryAchievements` in the same `campaign.json`.
 - Campaign author is required: `authorName` and `authorDescription` in both `ru` and `en`.
+- Equipment sets are described in top-level `equipmentCollections`, not inside `campaign`.
 - Equipment items go in top-level `equipmentItems`, not inside `campaign`.
+- If an item belongs to a set, add `equipmentItems[].collection`. The value must reference an `equipmentCollections[].id` from this pack or an existing active collection.
 - An achievement or daily/weekly quest can award an item with `rewardEquipmentItem`. The value must reference an `equipmentItems[].id` from this pack or an existing active item.
 - Do not embed images in JSON. Use `iconFileName` and `equipmentItems[].imageFileName`, then attach files separately.
 - PNG/WebP `256x256` is a normal size for campaign icons and item images. Max file size is 2 MB. `imageFileName` must be a file name only, with no directories.
@@ -97,9 +99,37 @@ Base campaign groups:
 
 If you need a new group, mention it in the PR idea. Before import, an admin must create and publish that global group separately with `kind = campaign_group`; the importer does not create new groups automatically.
 
-## Equipment Items
+## Equipment Sets And Items
 
 Equipment items are server content. They are not added to the player inventory immediately after import. A player receives an item only when they unlock an achievement or quest with `rewardEquipmentItem`.
+
+An equipment collection is a server content grouping for items with one theme. A set is not a one-click bundle purchase: the store and hero chest use it to group items, but each item is purchased or awarded separately.
+
+Collection fields:
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `id` | Yes | `snake_case` collection alias. |
+| `localizations.ru/en.name` | Yes | Collection name. |
+| `localizations.ru/en.description` | No | Collection description. |
+
+Collection example:
+
+```json
+{
+  "id": "samarkand_silk_set",
+  "localizations": {
+    "ru": {
+      "name": "Шелковый комплект Самарканда",
+      "description": "Легкие вещи для прогулок по площадям и базарам."
+    },
+    "en": {
+      "name": "Samarkand Silk Set",
+      "description": "Light items for walking through squares and bazaars."
+    }
+  }
+}
+```
 
 Supported `slot` values:
 
@@ -131,6 +161,7 @@ Item fields:
 | `slot` | Yes | One supported slot. |
 | `rarity` | Yes | One supported rarity. |
 | `imageFileName` | Yes | PNG/WebP file next to `campaign.json`, with no directories in the name. |
+| `collection` | No | Collection alias from `equipmentCollections[].id` or an existing active collection. |
 | `softPrice` | No | Coin price if the item should be available in the store. Usually omitted for reward-only items. |
 | `isStoreVisible` | No | `true` if the item should appear in the store. Usually absent or `false` for reward-only items. |
 | `localizations.ru/en.name` | Yes | Item name. |
@@ -313,11 +344,27 @@ Before final JSON, collect:
       }
     }
   },
+  "equipmentCollections": [
+    {
+      "id": "samarkand_silk_set",
+      "localizations": {
+        "ru": {
+          "name": "Шелковый комплект Самарканда",
+          "description": "Легкие вещи для прогулок по площадям и базарам."
+        },
+        "en": {
+          "name": "Samarkand Silk Set",
+          "description": "Light items for walking through squares and bazaars."
+        }
+      }
+    }
+  ],
   "equipmentItems": [
     {
       "id": "samarkand_silk_hat",
       "slot": "hat",
       "rarity": "rare",
+      "collection": "samarkand_silk_set",
       "imageFileName": "samarkand_silk_hat.png",
       "localizations": {
         "ru": {
@@ -360,29 +407,30 @@ Before final JSON, collect:
 - PR adds `quests/<campaign_id>/`.
 - Campaign folder has `campaign.json`, `README.md`, and icon if ready.
 - If the pack has `equipmentItems`, all files from `equipmentItems[].imageFileName` are included next to JSON.
+- If the pack has `equipmentCollections`, each collection is used by at least one `equipmentItems[].collection` or is clearly marked as future set groundwork.
 - JSON is valid and has no comments.
 - All ids are unique inside the pack.
 - All user-facing text exists in `ru` and `en`.
 - Daily/weekly quests use `points: 0`.
 - Main/passive/legendary achievements use `5` to `50` points, divisible by `5`.
 - Campaign legendary achievement references `campaign.id`.
+- `equipmentCollections` are top-level JSON and have `ru/en` name.
 - `equipmentItems` are top-level JSON, have supported slot/rarity, and have PNG/WebP `imageFileName`.
+- All `equipmentItems[].collection` values, if present, reference a collection from this pack or an existing active collection.
 - All `rewardEquipmentItem` values reference an item from this pack or an existing active item.
 
 ## Maintainer Check And Import
 
 ### Admin UI
 
-For packs without item images, the main maintainer path is:
+The main maintainer path is:
 
 1. Open Filament admin.
 2. Go to `Content -> Campaign Pack Importer`.
-3. Upload `campaign.json` and campaign icon.
+3. Upload `campaign.json`, campaign icon, and all PNG/WebP files from `equipmentItems[].imageFileName` if the pack contains items.
 4. Click `Check`.
-5. Review campaign, author, main quests, daily/weekly, hidden achievements, legendary achievements, titles, items, errors, and warnings.
+5. Review campaign, author, main quests, daily/weekly, hidden achievements, legendary achievements, titles, collections, items, errors, and warnings.
 6. If status is `Importable`, click `Import`.
-
-If the pack contains `equipmentItems` with new `imageFileName` files, use CLI import or place the item files next to JSON on the server first: the importer looks for item images in the same folder as `campaign.json`.
 
 ### CLI
 
@@ -403,7 +451,7 @@ Import rules:
 - without `--apply`, the command only validates JSON and prints a report;
 - all files from `equipmentItems[].imageFileName` must sit in the same folder as `campaign.json`;
 - `campaign.group` must already exist as an active global group;
-- one JSON imports campaign, main achievements, daily/weekly, passive hidden, legendary, global legendary, player titles, and equipment items;
+- one JSON imports campaign, main achievements, daily/weekly, passive hidden, legendary, global legendary, player titles, equipment collections, and equipment items;
 - campaign icon and item images are copied into public content storage;
 - `256x256` is a normal icon/item image size; smaller than `256x256` is not accepted for campaign icon;
 - import does not change user progress, completions, points, wallet, or entitlements.
