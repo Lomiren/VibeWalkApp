@@ -7,13 +7,13 @@
     "iconFileName": "munchkin_gazebo_hunt_icon.png",
     "localizations": {
       "ru": {
-        "title": "Манчкин: Охота на Газебо",
+        "title": "Охота на Газебо",
         "description": "Легендарная битва начинается там, где заканчивается здравый смысл.",
         "authorName": "Lomiren",
         "authorDescription": "Легендарная битва начинается там, где заканчивается здравый смысл."
       },
       "en": {
-        "title": "Munchkin: Gazebo Hunt",
+        "title": "Gazebo Hunt",
         "description": "The legendary battle begins where common sense ends.",
         "authorName": "Lomiren",
         "authorDescription": "The legendary battle begins where common sense ends."
