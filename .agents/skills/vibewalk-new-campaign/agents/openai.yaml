@@ -1,0 +1,4 @@
+interface:
+  display_name: "Начинаем новую кампанию"
+  short_description: "Start a clean VibeWalk campaign branch."
+  default_prompt: "Use $vibewalk-new-campaign to start a fresh VibeWalk community campaign interview and create a clean campaign branch."
