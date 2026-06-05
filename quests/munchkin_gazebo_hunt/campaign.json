@@ -1,0 +1,693 @@
+{
+  "contentPackVersion": "1.0",
+  "packType": "campaign",
+  "campaign": {
+    "id": "munchkin_gazebo_hunt",
+    "group": "global_games",
+    "iconFileName": "munchkin_gazebo_hunt_icon.png",
+    "localizations": {
+      "ru": {
+        "title": "Охота на Газебо",
+        "description": "Легендарная битва начинается там, где заканчивается здравый смысл.",
+        "authorName": "Lomiren",
+        "authorDescription": "Легендарная битва начинается там, где заканчивается здравый смысл."
+      },
+      "en": {
+        "title": "Gazebo Hunt",
+        "description": "The legendary battle begins where common sense ends.",
+        "authorName": "Lomiren",
+        "authorDescription": "The legendary battle begins where common sense ends."
+      }
+    },
+    "playerTitles": [
+      {
+        "id": "gazebo_victim",
+        "localizations": {
+          "ru": {
+            "name": "Жертва Газебо",
+            "description": "Разбудил Газебо и получил важный жизненный урок."
+          },
+          "en": {
+            "name": "Gazebo Victim",
+            "description": "Awakened the Gazebo and received an important life lesson."
+          }
+        }
+      },
+      {
+        "id": "gazebo_hunter",
+        "localizations": {
+          "ru": {
+            "name": "Охотник на Газебо",
+            "description": "Убежал от Газебо живым и сделал вид, что так и было задумано."
+          },
+          "en": {
+            "name": "Gazebo Hunter",
+            "description": "Escaped the Gazebo alive and pretended it was the plan all along."
+          }
+        }
+      }
+    ],
+    "commonAchievements": [
+      {
+        "id": "munchkin_gazebo_hunt_take_growth_quest",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 15000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Взять квест на вырост",
+            "short_description": "Квест явно больше, чем кажется.",
+            "description": "Паладин берет поручение, которое пока выглядит как обычная прогулка. Это ненадолго."
+          },
+          "en": {
+            "title": "Take a Quest to Grow Into",
+            "short_description": "The quest is clearly larger than it looks.",
+            "description": "The paladin accepts a task that still looks like a normal walk. That will not last."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_go_to_garden",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 35000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Отправиться в сад",
+            "short_description": "Все в сад. Особенно паладин.",
+            "description": "Герой отправляется туда, где обычно растут цветы, кусты и сюжетные ошибки."
+          },
+          "en": {
+            "title": "Go to the Garden",
+            "short_description": "To the garden. Especially the paladin.",
+            "description": "The hero heads to a place where flowers, bushes, and plot mistakes usually grow."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_hear_gazebo",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 60000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Услышать слово «Газебо» и насторожиться",
+            "short_description": "Звучит как монстр. Наверное.",
+            "description": "Паладин слышит незнакомое слово и делает единственный логичный вывод: это опасно."
+          },
+          "en": {
+            "title": "Hear the Word \"Gazebo\" and Get Suspicious",
+            "short_description": "It sounds like a monster. Probably.",
+            "description": "The paladin hears an unfamiliar word and reaches the only logical conclusion: danger."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_ask_color",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 85000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Спросить у мастера, какого оно цвета",
+            "short_description": "Цвет врага многое решает.",
+            "description": "Герой уточняет цвет Газебо, потому что тактическое мышление должно с чего-то начинаться."
+          },
+          "en": {
+            "title": "Ask the Master What Color It Is",
+            "short_description": "Enemy color matters.",
+            "description": "The hero asks for the Gazebo's color, because tactical thinking has to start somewhere."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_call_gazebo",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 110000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Проверить, отвечает ли Газебо на зов",
+            "short_description": "Не отвечает. Подозрительно.",
+            "description": "Паладин зовет Газебо. Газебо молчит с архитектурным достоинством."
+          },
+          "en": {
+            "title": "Check Whether the Gazebo Answers",
+            "short_description": "It does not answer. Suspicious.",
+            "description": "The paladin calls out to the Gazebo. The Gazebo remains silent with architectural dignity."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_find_map",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 135000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Найти карту к Газебо",
+            "short_description": "Без карты беседка не считается боссом.",
+            "description": "Герой находит карту к Газебо, чтобы уверенно заблудиться в правильном направлении."
+          },
+          "en": {
+            "title": "Find the Map to the Gazebo",
+            "short_description": "Without a map, a gazebo is not a boss.",
+            "description": "The hero finds a map to the Gazebo, ensuring he can get lost in the correct direction."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_confirm_not_monster",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 160000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Уточнить, точно ли это не монстр",
+            "short_description": "Мастер слишком спокоен.",
+            "description": "Паладин пытается получить прямой ответ. Прямой ответ, конечно, только усиливает подозрения."
+          },
+          "en": {
+            "title": "Confirm It Is Definitely Not a Monster",
+            "short_description": "The master is far too calm.",
+            "description": "The paladin tries to get a straight answer. Naturally, the straight answer only makes it worse."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_get_sandals",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 185000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Добыть Сандалии Тысячи Шагов",
+            "short_description": "Они идут сами. Иногда не туда.",
+            "description": "Герой добывает сандалии, которые обещают тысячу шагов и ни одного здравого решения."
+          },
+          "en": {
+            "title": "Claim the Sandals of a Thousand Steps",
+            "short_description": "They walk by themselves. Sometimes the wrong way.",
+            "description": "The hero claims sandals promising a thousand steps and not a single sensible choice."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_find_amulet",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 210000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Найти Амулет Вечного Похода",
+            "short_description": "Возвращаться теперь неудобно.",
+            "description": "Амулет намекает, что дорога будет длинной. Паладин делает вид, что это бонус."
+          },
+          "en": {
+            "title": "Find the Amulet of the Eternal Hike",
+            "short_description": "Turning back is awkward now.",
+            "description": "The amulet suggests the road will be long. The paladin pretends this is a bonus."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_get_staff",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 235000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Добыть Посох Бесконечной Дороги",
+            "short_description": "Посох знает путь. Молчит из вредности.",
+            "description": "Герой получает посох, который выглядит мудрым, но не объясняет, зачем идти к Газебо."
+          },
+          "en": {
+            "title": "Claim the Staff of the Endless Road",
+            "short_description": "The staff knows the way. It refuses to help.",
+            "description": "The hero gains a staff that looks wise, yet offers no explanation for visiting the Gazebo."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_get_cloak",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 260000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Заполучить Плащ Сомнительной Храбрости",
+            "short_description": "Плащ храбрый. Владелец уточняется.",
+            "description": "Плащ драматично развевается даже тогда, когда герой просто ищет выход."
+          },
+          "en": {
+            "title": "Acquire the Cloak of Questionable Courage",
+            "short_description": "The cloak is brave. The wearer is pending review.",
+            "description": "The cloak billows dramatically even when the hero is merely looking for an exit."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_find_boots",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 285000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Найти Сапоги Неудержимого Путника",
+            "short_description": "Тормозов в комплекте нет.",
+            "description": "Паладин находит сапоги, которые отлично подходят для похода и подозрительно хорошо для побега."
+          },
+          "en": {
+            "title": "Find the Boots of the Unstoppable Wanderer",
+            "short_description": "Brakes not included.",
+            "description": "The paladin finds boots suited for a journey and suspiciously well suited for an escape."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_exorcise_morning_demon",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 310000,
+          "totalStairsEquivalentInCategory": 300
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Изгнать Демона Утреннего Подъема",
+            "short_description": "300 вершин против желания поспать.",
+            "description": "Герой проходит достаточно ступеней, чтобы даже утро признало поражение."
+          },
+          "en": {
+            "title": "Banish the Demon of the Morning Climb",
+            "short_description": "300 peaks against the urge to sleep.",
+            "description": "The hero climbs enough stair-equivalents for even the morning to admit defeat."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_cross_excuse_swamp",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 335000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Пройти через Болото Вечных Отговорок",
+            "short_description": "Сухим выходит только расписание.",
+            "description": "Паладин проходит болото, где каждая кочка предлагает начать завтра."
+          },
+          "en": {
+            "title": "Cross the Swamp of Eternal Excuses",
+            "short_description": "Only the schedule stays dry.",
+            "description": "The paladin crosses a swamp where every patch of ground suggests starting tomorrow."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_loot_sleepy_dragon_cave",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 360000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Разграбить Пещеру Сонного Дракона",
+            "short_description": "Тише. Дракон на перерыве.",
+            "description": "Герой находит пещеру, где самый опасный противник — желание прилечь рядом."
+          },
+          "en": {
+            "title": "Loot the Cave of the Sleepy Dragon",
+            "short_description": "Quiet. The dragon is on break.",
+            "description": "The hero finds a cave where the most dangerous enemy is the urge to lie down nearby."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_find_approach",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 385000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Найти подход к Газебо",
+            "short_description": "Главное — не подходить слишком уверенно.",
+            "description": "Паладин наконец находит подход к Газебо. Подход выглядит как обычная дорожка, что только сбивает с толку."
+          },
+          "en": {
+            "title": "Find the Approach to the Gazebo",
+            "short_description": "The key is not approaching too confidently.",
+            "description": "The paladin finally finds the approach to the Gazebo. It looks like a normal path, which only makes things worse."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_fire_plus_three_arrow",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 410000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Выстрелить стрелой +3 в архитектуру",
+            "short_description": "Архитектура держится.",
+            "description": "Герой применяет серьезный аргумент против несущей конструкции. Стрела остается, Газебо тоже."
+          },
+          "en": {
+            "title": "Fire a +3 Arrow at Architecture",
+            "short_description": "The architecture holds.",
+            "description": "The hero applies a serious argument against a structural feature. The arrow remains, and so does the Gazebo."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_awaken_gazebo",
+        "points": 10,
+        "isRequiredForLegendary": true,
+        "conditions": {
+          "totalStepsInCategory": 435000
+        },
+        "sourceType": "game_milestone",
+        "localizations": {
+          "ru": {
+            "title": "Разбудить Газебо окончательно",
+            "short_description": "Поздно. Оно уже заметило.",
+            "description": "Паладин делает ровно столько, чтобы Газебо перестало быть просто фоном и стало проблемой."
+          },
+          "en": {
+            "title": "Awaken the Gazebo for Good",
+            "short_description": "Too late. It noticed.",
+            "description": "The paladin does exactly enough for the Gazebo to stop being scenery and become a problem."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_hire_fire_mage",
+        "points": 10,
+        "isRequiredForLegendary": false,
+        "conditions": {
+          "totalStepsInCategory": 460000
+        },
+        "sourceType": "optional_challenge",
+        "localizations": {
+          "ru": {
+            "title": "Нанять огненного мага на потом",
+            "short_description": "План Б пахнет дымом.",
+            "description": "Герой заранее ищет специалиста, который однажды объяснит Газебо правила пожарной безопасности."
+          },
+          "en": {
+            "title": "Hire a Fire Mage for Later",
+            "short_description": "Plan B smells like smoke.",
+            "description": "The hero starts looking for a specialist who may someday teach the Gazebo about fire safety."
+          }
+        }
+      },
+      {
+        "id": "munchkin_gazebo_hunt_escape_alive",
+        "points": 50,
+        "isRequiredForLegendary": false,
+        "rewardPlayerTitle": "gazebo_hunter",
+        "conditions": {
+          "totalStepsInCategory": 876543
+        },
+        "sourceType": "optional_challenge",
+        "localizations": {
+          "ru": {
+            "title": "Убежать от Газебо живым",
+            "short_description": "Победа бывает на расстоянии.",
+            "description": "Паладин выбирает редчайшую форму мудрости: выжить, уйти и назвать это охотой."
+          },
+          "en": {
+            "title": "Escape the Gazebo Alive",
+            "short_description": "Victory can be measured in distance.",
+            "description": "The paladin chooses the rarest form of wisdom: survive, leave, and call it a hunt."
+          }
+        }
+      }
+    ],
+    "dailyQuests": [
+      {
+        "id": "munchkin_gazebo_hunt_daily_inspect_garden",
+        "points": 0,
+        "conditions": {
+          "stepsInDay": 6000
+        },
+        "progressCounter": "completionCount",
+        "localizations": {
+          "ru": {
+            "title": "Осмотреть сад",
+            "short_description": "Набери 6000 шагов за день.",
+            "description": "Осмотри сад пешком и убедись, что подозрительная белая штука все еще там."
+          },
+          "en": {
+            "title": "Inspect the Garden",
+            "short_description": "Get 6000 steps in a day.",
+            "description": "Inspect the garden on foot and confirm that the suspicious white thing is still there."
+          }
+        }
+      }
+    ],
+    "weeklyQuests": [
+      {
+        "id": "munchkin_gazebo_hunt_weekly_do_not_argue",
+        "points": 0,
+        "conditions": {
+          "daysInWeekWithAtLeastSteps": {
+            "days": 5,
+            "steps": 5000
+          }
+        },
+        "progressCounter": "completionCount",
+        "localizations": {
+          "ru": {
+            "title": "Пять дней не спорить с мастером",
+            "short_description": "Пять дней в неделю набери хотя бы 5000 шагов.",
+            "description": "Пять дней в неделю просто иди. Мастер уже объяснил, что это Газебо."
+          },
+          "en": {
+            "title": "Do Not Argue with the Master for Five Days",
+            "short_description": "Get at least 5000 steps on five days in a week.",
+            "description": "For five days in a week, just walk. The master already explained that it is a Gazebo."
+          }
+        }
+      }
+    ],
+    "passiveHiddenAchievements": [
+      {
+        "id": "passive_munchkin_gazebo_hunt_chosen",
+        "type": "passive_hidden",
+        "scope": "campaign",
+        "points": 10,
+        "isHiddenUntilUnlocked": true,
+        "conditions": {
+          "event": "categorySelected",
+          "categoryId": "munchkin_gazebo_hunt"
+        },
+        "localizations": {
+          "ru": {
+            "title": "Принять охоту на Газебо",
+            "short_description": "Кампания стала активной.",
+            "description": "Игрок выбрал охоту на Газебо как активную кампанию. Обратной дороги почти нет."
+          },
+          "en": {
+            "title": "Accept the Gazebo Hunt",
+            "short_description": "The campaign became active.",
+            "description": "The player selected the Gazebo hunt as the active campaign. There is almost no turning back."
+          }
+        }
+      },
+      {
+        "id": "passive_munchkin_gazebo_before_coffee",
+        "type": "passive_hidden",
+        "scope": "campaign",
+        "points": 10,
+        "isHiddenUntilUnlocked": true,
+        "conditions": {
+          "timeWindowSteps": {
+            "startTime": "05:00",
+            "endTime": "08:00",
+            "minSteps": 3000,
+            "occurrences": 7
+          }
+        },
+        "localizations": {
+          "ru": {
+            "title": "До кофе Газебо не трогать",
+            "short_description": "7 раз пройди 3000 шагов с 05:00 до 08:00.",
+            "description": "Семь раз набери 3000 шагов ранним утром. Газебо пока лучше не объяснять, зачем."
+          },
+          "en": {
+            "title": "Do Not Touch the Gazebo Before Coffee",
+            "short_description": "Walk 3000 steps from 05:00 to 08:00 seven times.",
+            "description": "Reach 3000 steps in the early morning seven times. It is better not to explain why to the Gazebo yet."
+          }
+        }
+      },
+      {
+        "id": "passive_munchkin_gazebo_lunch_instead",
+        "type": "passive_hidden",
+        "scope": "campaign",
+        "points": 10,
+        "isHiddenUntilUnlocked": true,
+        "conditions": {
+          "timeWindowSteps": {
+            "startTime": "12:00",
+            "endTime": "14:00",
+            "minSteps": 3000,
+            "occurrences": 7
+          }
+        },
+        "localizations": {
+          "ru": {
+            "title": "Газебо вместо обеда",
+            "short_description": "7 раз пройди 3000 шагов с 12:00 до 14:00.",
+            "description": "Семь раз набери 3000 шагов в обеденное окно. Ланч подождет, архитектура подозрительна сейчас."
+          },
+          "en": {
+            "title": "Gazebo Instead of Lunch",
+            "short_description": "Walk 3000 steps from 12:00 to 14:00 seven times.",
+            "description": "Reach 3000 steps during the lunch window seven times. Lunch can wait; the architecture is suspicious now."
+          }
+        }
+      },
+      {
+        "id": "passive_munchkin_gazebo_are_you_sleeping",
+        "type": "passive_hidden",
+        "scope": "campaign",
+        "points": 10,
+        "isHiddenUntilUnlocked": true,
+        "conditions": {
+          "timeWindowSteps": {
+            "startTime": "22:00",
+            "endTime": "24:00",
+            "minSteps": 3000,
+            "occurrences": 7
+          }
+        },
+        "localizations": {
+          "ru": {
+            "title": "Газебо, ты спишь?",
+            "short_description": "7 раз пройди 3000 шагов с 22:00 до 24:00.",
+            "description": "Семь раз набери 3000 шагов поздним вечером. Если Газебо не отвечает, это еще ничего не доказывает."
+          },
+          "en": {
+            "title": "Gazebo, Are You Sleeping?",
+            "short_description": "Walk 3000 steps from 22:00 to 24:00 seven times.",
+            "description": "Reach 3000 steps late in the evening seven times. If the Gazebo does not answer, that proves nothing."
+          }
+        }
+      },
+      {
+        "id": "passive_munchkin_gazebo_marathon_still_enemy",
+        "type": "passive_hidden",
+        "scope": "campaign",
+        "points": 20,
+        "isHiddenUntilUnlocked": true,
+        "conditions": {
+          "totalDistanceMetersInCategory": 42500,
+          "categoryId": "munchkin_gazebo_hunt"
+        },
+        "localizations": {
+          "ru": {
+            "title": "Марафон вокруг неподвижного врага",
+            "short_description": "Накопи 42,5 км внутри кампании.",
+            "description": "Игрок прошел марафонскую дистанцию вокруг проблемы, которая все это время стояла на месте."
+          },
+          "en": {
+            "title": "Marathon Around a Stationary Enemy",
+            "short_description": "Accumulate 42.5 km inside the campaign.",
+            "description": "The player covered a marathon distance around a problem that remained perfectly still the entire time."
+          }
+        }
+      }
+    ],
+    "legendaryAchievement": {
+      "id": "legendary_munchkin_gazebo_hunt_paladin_and_gazebo",
+      "points": 50,
+      "rewardPlayerTitle": "gazebo_victim",
+      "conditions": {
+        "allCommonAchievementsCompletedInCategory": "munchkin_gazebo_hunt"
+      },
+      "localizations": {
+        "ru": {
+          "title": "Паладин и Газебо",
+          "short_description": "Все обязательные цели кампании закрыты.",
+          "description": "Паладин прошел путь от первого подозрения до окончательного пробуждения Газебо. Это легенда, хотя и не совсем победа."
+        },
+        "en": {
+          "title": "The Paladin and the Gazebo",
+          "short_description": "All required campaign goals are complete.",
+          "description": "The paladin went from first suspicion to fully awakening the Gazebo. It is a legend, even if not exactly a victory."
+        }
+      }
+    }
+  },
+  "globalLegendaryAchievements": [
+    {
+      "id": "legendary_munchkin_gazebo_hunter",
+      "points": 50,
+      "conditions": {
+        "totalStepsInCategory": 876543,
+        "categoryId": "munchkin_gazebo_hunt"
+      },
+      "localizations": {
+        "ru": {
+          "title": "Охотник на Газебо",
+          "short_description": "Убеги от Газебо живым.",
+          "description": "Игрок прошел 876543 шага в кампании, пережил встречу с Газебо и получил право говорить, что охота удалась."
+        },
+        "en": {
+          "title": "Gazebo Hunter",
+          "short_description": "Escape the Gazebo alive.",
+          "description": "The player walked 876543 steps in the campaign, survived the Gazebo, and earned the right to say the hunt succeeded."
+        }
+      }
+    }
+  ]
+}
